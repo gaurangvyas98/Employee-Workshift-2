@@ -1,9 +1,18 @@
-import React, { useContext } from 'react'
-import {Link} from 'react-router-dom'
+import React, { useContext, useEffect } from 'react'
+import {Link, useHistory} from 'react-router-dom'
+import M from 'materialize-css';
 
 import { UserContext } from '../App';
 function Navbar(){
     const {state, dispatch} = useContext(UserContext);
+    const history = useHistory();
+
+    useEffect(()=>{
+        // M.Sidenav.init(elems);
+        let sidenav = document.querySelector('#mobile-demo');
+        M.Sidenav.init(sidenav, {});
+      },[])
+      
     //this function will return profile, create post link in nav if user is logged in otherwise it will return login and signup link in the navbar
     const renderList=()=>{
         if(state){
@@ -11,13 +20,23 @@ function Navbar(){
             if(state.role === "ADMIN"){
                 return([
                     <li><Link to="/">Home</Link></li>,
-                    <li><Link to="/Create-Task">Create Task</Link></li>
+                    <li><Link to="/Create-Task">Create Task</Link></li>,
+                    <li><button className="btn waves-effect waves-light #d32f2f red darken-2" onClick={() => {
+                        localStorage.clear();
+                        dispatch({ type: "CLEAR" })
+                        history.push("/Login")
+                      }}>LOGOUT</button></li>      
                 ])
             }
             //if role===USER then show home
             else{
                 return([
                     <li><Link to="/">Home</Link></li>,
+                    <li><button className="btn waves-effect waves-light #d32f2f red darken-2" onClick={() => {
+                        localStorage.clear();
+                        dispatch({ type: "CLEAR" })
+                        history.push("/Login")
+                      }}>LOGOUT</button></li>
                 ])
             }
            
