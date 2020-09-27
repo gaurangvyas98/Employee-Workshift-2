@@ -2,15 +2,13 @@
 const express = require('express');
 const mongoose = require('mongoose');
 const morgan = require('morgan');
-const path = require('path');
 
 const app = express();
 const PORT = process.env.PORT || 8080; // Step 1
 
-const routes = require('./routes/api');
 
 // Step 2
-mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/mern_youtube', {
+mongoose.connect(process.env.MONGODB_URI || 'mongodb://localhost/workShift', {
     useNewUrlParser: true,
     useUnifiedTopology: true
 });
@@ -23,18 +21,58 @@ mongoose.connection.on('connected', () => {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
-// Step 3
+require('./models/user');
+require('./models/task');
 
-if (process.env.NODE_ENV === 'production') {
-    app.use(express.static('client/build'));
-}
-
-
-// HTTP request logger
-app.use(morgan('tiny'));
-app.use('/api', routes);
-
-
+app.use(express.json())
+app.use(require('./routes/auth'))
+app.use(require('./routes/task'))
+// app.use(require('./routes/flight'))
+// app.use(require('./routes/user'))
 
 
 app.listen(PORT, console.log(`Server is starting at ${PORT}`));
+
+
+
+
+
+
+// const express = require('express');
+// const mongoose = require('mongoose')
+// const {MONGOURI} = require('./config/key')
+// const app = express();
+
+// const PORT = process.env.PORT || 5000; 
+
+// mongoose.connect(MONGOURI , {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// });
+
+// mongoose.connection.on('connected', () => {
+//     console.log('Mongoose is connected!!!!');
+// });
+// mongoose.connection.on('error',(err)=>{
+//     console.log("err connecting",err)
+// })
+
+// require('./models/user');
+// require('./models/post');
+
+// app.use(express.json())
+// app.use(require('./routes/auth'))
+// app.use(require('./routes/post'))
+// app.use(require('./routes/user'))
+
+
+// if(process.env.NODE_ENV=="production"){
+//     app.use(express.static('client/build'))
+//     const path = require('path')
+//     app.get("*",(req,res)=>{
+//         res.sendFile(path.resolve(__dirname,'client','build','index.html'))
+//     })
+// }
+
+
+// app.listen(PORT, console.log(`Server is starting at ${PORT}`));
