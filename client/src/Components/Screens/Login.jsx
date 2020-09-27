@@ -1,12 +1,14 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import {Link, useHistory} from 'react-router-dom';
 import M from 'materialize-css';
+import { UserContext } from '../../App';
 
 function Login(){
 
     const history = useHistory();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const {state, dispatch} = useContext(UserContext);
     
     const onLogin=()=>{
         fetch('/login', {
@@ -30,24 +32,28 @@ function Login(){
                 if(data.user.role === 'ADMIN'){
                     console.log("admin")
                     // console.log(data.user, data.allUsersData)
-                    localStorage.setItem("ADMIN", JSON.stringify(data.user))
+                    localStorage.setItem("role", "ADMIN")
+                    localStorage.setItem("loggedUser", JSON.stringify(data.user))
                     localStorage.setItem("AllUsers", JSON.stringify(data.allUsersData))
-                    // dispatch({ type: "ADMIN", payload: data.user })
+                    dispatch({ type: "ADMIN", payload: data.user})
                 }else{
                     console.log("user")
                     // console.log(data)
-                    localStorage.setItem("user", JSON.stringify(data.user))
+                    localStorage.setItem("role", "USER")
+                    localStorage.setItem("loggedUser", JSON.stringify(data.user))
+                    dispatch({ type: "USER", payload: data.user })
                 }
                 // dispatch({type:"USER", payload: data.user})
                 M.toast({html: "Successfully loggedIN",classes:"#43a047 green darken-1"})
                 history.push('/')
+                window.location.reload()
             }
         })
     }
     return(
         <div className="mycard">
         <div className="card auth-card input-field">
-          <h2>Instagram</h2>
+          <h2>Scheduler</h2>
           <input
             type="text"
             placeholder="Email"
