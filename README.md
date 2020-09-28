@@ -9,3 +9,8 @@ npm install
 cd client
 npm install
 ```
+
+## To Run
+```bash
+npm run dev
+```
