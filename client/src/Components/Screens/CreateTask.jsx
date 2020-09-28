@@ -14,7 +14,7 @@ function CreateTask(){
     let assignedBy;
     if(state){
         assignedBy = state.name;
-        console.log("state", state.name);
+        console.log("state", state.allUsersData);
     }
     
     const onAssignTask=()=>{
@@ -44,7 +44,7 @@ function CreateTask(){
             console.log(err)
          })
     }
-    console.log(taskName, description, duration, assignedTo, assignedBy)
+    // console.log(taskName, description, duration, assignedTo, assignedBy)
     return(
         <div className="card input-field" style={{
             margin:"40px auto",

@@ -43,7 +43,7 @@ router.get("/getAllTask", requireLogin, (req,res)=>{
     Tasks.find({ assignedTo: req.user._id })
     .populate("name", "assignedBy")
     .then(mytask=>{
-        console.log(mytask)
+        // console.log(mytask)
         res.json({mytask})
     })
     .catch(err=>{

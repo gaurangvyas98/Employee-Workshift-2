@@ -23,16 +23,19 @@ const Routing=()=>{
     let user;
     if(localStorage.getItem("role")==='ADMIN'){
       user = JSON.parse(localStorage.getItem("loggedUser"));
+      let allUsersData = JSON.parse(localStorage.getItem("AllUsers"))
+      // console.log(allUsersData)
       dispatch({ type: "ADMIN", payload: user})
+      dispatch({ type: "ALLUSERSDATA", payload: allUsersData})
     }
     else{
       user = JSON.parse(localStorage.getItem("loggedUser"));
       dispatch({ type: "USER", payload: user})
     }
-    console.log("user", user)
+    console.log("Logged User Details", user)
     if(user){
-      dispatch({ type: "USER", payload: user})
-      // history.push("/")
+      // dispatch({ type: "USER", payload: user})
+      // history.push("/")   
     }
     else{
       history.push("/Login")

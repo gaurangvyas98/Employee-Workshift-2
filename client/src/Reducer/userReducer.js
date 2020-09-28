@@ -9,6 +9,12 @@ export const reducer = (state,action)=>{
     if(action.type === "ADMIN"){
         return action.payload
     }
+    if(action.type === "ALLUSERSDATA"){
+        return {
+            ...state,
+            allUsersData: action.payload
+        }
+    }
     if(action.type === "CLEAR"){
         return null
     }
