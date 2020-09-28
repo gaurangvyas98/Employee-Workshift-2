@@ -15,20 +15,22 @@ router.post("/Create-Task", requireLogin, (req,res)=>{
         return res.status(403).json({ error: "Not authorized"})
     }
 
-    const { name, description, duration, assignedBy, assignedTo } = req.body
-    if(!name || !description || !duration || !assignedBy || !assignedTo){
+    const { taskName, description, duration, assignedBy, assignedTo } = req.body
+    // console.log(taskName, description, duration, assignedBy, assignedTo)
+    if(!taskName || !description || !duration || !assignedBy || !assignedTo){
         return res.status(422).json({ error: "Fill all the fields..."})
     }
 
     const task = new Tasks({
-        name,
+        taskName,
         description,
         duration,
         assignedBy,
         assignedTo
     })
     task.save().then(task => {
-        res.json({ message: "Task given to user successfully "})
+        res.json({ message: "Task assigned to user successfully "})
+        // console.log(task)
     }).catch(err=>{
         console.log(err);
     })
@@ -36,9 +38,10 @@ router.post("/Create-Task", requireLogin, (req,res)=>{
 
 // VIEW ALL THE TASK -- USER
 router.get("/getAllTask", requireLogin, (req,res)=>{
-    console.log(req.user.name)
+    // console.log(req.user._id)
+    console.log(req.body)
     Tasks.find({ assignedTo: req.user._id })
-    .populate("name", " assignedBy")
+    .populate("name", "assignedBy")
     .then(mytask=>{
         console.log(mytask)
         res.json({mytask})

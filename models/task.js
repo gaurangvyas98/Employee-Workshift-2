@@ -2,7 +2,7 @@ const mongoose = require('mongoose')
 const {ObjectId} = mongoose.Schema.Types
 
 const taskSchema = new mongoose.Schema({
-    name: {
+    taskName: {
         type: String,
         require: true
     },
@@ -19,8 +19,9 @@ const taskSchema = new mongoose.Schema({
         require: true
     },
     assignedTo:{
-        type: ObjectId,
-        ref: "User",
+        // type: ObjectId,
+        // ref: "User",
+        type: String,
         require: true
     }
 },{timestamps:true})
