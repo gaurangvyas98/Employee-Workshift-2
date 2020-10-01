@@ -62,8 +62,6 @@ router.post("/login", (req,res)=>{
             bcrypt.compare(password, savedUser.password)
                 .then(doMatch => {
                     if(doMatch){
-                        // res.json({ message: "Successfully LOGGED IN...!!!"})
-
                         //generating token using user_id
                         const token = jwt.sign({ _id: savedUser._id}, JWT_SECRET);
                         // const token = jwt.sign({ _id: savedUser._id, role: savedUser.role }, JWT_SECRET);
@@ -72,14 +70,14 @@ router.post("/login", (req,res)=>{
                         const {_id, name, email, role } = savedUser
                         // res.header('x-auth-header', token).send({ user: {_id, name, email, role} })
                         
-                        //if role is admin then send all users info in that
-                        if(role === 'ADMIN'){
-                            return User.find().then(allUsersData => {
-                                // let { name, email, _id } = allUsersData
-                                res.json({token, user: {_id, name, email, role}, allUsersData: [allUsersData] })
-                            })
-                        //    return  User.find().then(allUsersData => const {name, email, _id} = allUsersData; res.json({ token, user: {_id, name, email, role}, allUsersData:  }))   
-                        }
+                        //if role is admin then send all users info in that ---ALL USERS DATA TO FRONTEND
+                        // if(role === 'ADMIN'){
+                        //     return User.find().then(allUsersData => {
+                        //         // let { name, email, _id } = allUsersData
+                        //         res.json({token, user: {_id, name, email, role}, allUsersData: [allUsersData] })
+                        //     })
+                        // //    return  User.find().then(allUsersData => const {name, email, _id} = allUsersData; res.json({ token, user: {_id, name, email, role}, allUsersData:  }))   
+                        // }
     
                         res.json({ token, user: {_id, name, email, role} })
                     }

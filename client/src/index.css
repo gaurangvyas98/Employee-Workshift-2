@@ -1,29 +1,39 @@
 body {
   margin: 0;
+  background-image: -webkit-linear-gradient(360deg, #232868 50%, #f92562 50%);
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen",
     "Ubuntu", "Cantarell", "Fira Sans", "Droid Sans", "Helvetica Neue",
     sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
+.link-underline{
+  text-decoration: none;
+}
 
-
-/* ------------------------------------------------------------------- */
 /* -----------------SIGN IN and SIGN UP----------------------------- */
+.appbar-navbar{
+  color: black !important;
+  background-color: #fff !important;
+}
 .brand-logo, h2{
   font-family: 'Grand Hotel', cursive;
+  /* font-size: 2rem; */
 }
-.mycard{
-  margin-top: 40px;
-}
-.auth-card{
-  padding: 20px;
+.login-card{
+  padding: 30px;
+  display: flex;
+  flex-direction: column;
   text-align: center;
   max-width: 400px;
-  margin: 10px auto;
+  margin: 5% auto;
+  align-items: center;
+}
+.link-decoration{
+  text-decoration: none;
 }
 
-.input-field input[type=text]:focus {
+/* .input-field input[type=text]:focus {
   border-bottom: 1px solid rgb(8, 93, 252) !important;
   box-shadow: 0 1px 0 0 rgb(8, 93, 252)  !important;
 }
@@ -39,4 +49,45 @@ body {
 textarea:focus{
   border-bottom: 1px solid rgb(8, 93, 252) !important;
   box-shadow: 0 1px 0 0 rgb(8, 93, 252)  !important;
+} */
+
+
+/* ---------------------DASHBOARD--------------------------- */
+/* .MuiAvatar-root{
+  margin: 15% auto 2% auto;
+  width: 60% !important;
+  height: 60% !important;
+} */
+
+/* 
+header, main, footer {
+	 padding-left: 300px;
+} */
+/* .home .createTaskPage{
+  margin-left: 300px;
 }
+@media only screen and (max-width : 992px) {
+  .home{
+  padding-left: 0;
+  }
+} */
+/* 	
+@media only screen and (max-width : 992px) {
+    header, main, footer {
+    padding-left: 0;
+    }
+} */
+
+/* ------------------------------------------------------------------- */
+/* .wrapper{
+  padding-left: 300px;
+} */
+/* .side-nav{
+  top: 65px;
+  width: 250px;
+} */
+/* @media only screen and (min-width : 992px) {
+  .invesible-top {
+    top: 0;
+  }
+} */
