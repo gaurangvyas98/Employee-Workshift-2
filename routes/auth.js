@@ -67,7 +67,7 @@ router.post("/login", (req,res)=>{
                         // const token = jwt.sign({ _id: savedUser._id, role: savedUser.role }, JWT_SECRET);
                         
                         // sending token and user data like id,name & email of the user to FRONT END
-                        const {_id, name, email, role } = savedUser
+                        const {_id, name, email, role, pic } = savedUser
                         // res.header('x-auth-header', token).send({ user: {_id, name, email, role} })
                         
                         //if role is admin then send all users info in that ---ALL USERS DATA TO FRONTEND
@@ -79,7 +79,7 @@ router.post("/login", (req,res)=>{
                         // //    return  User.find().then(allUsersData => const {name, email, _id} = allUsersData; res.json({ token, user: {_id, name, email, role}, allUsersData:  }))   
                         // }
     
-                        res.json({ token, user: {_id, name, email, role} })
+                        res.json({ token, user: {_id, name, email, role, pic} })
                     }
                     else{
                         return res.status(442).json({ error : "Invalid EMAIL or PASSWORD..!!!"});

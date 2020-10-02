@@ -15,6 +15,12 @@ export const reducer = (state,action)=>{
             allUsersData: action.payload
         }
     }
+    if(action.type === "UPDATEPIC"){
+        return {
+            ...state,
+            pic: action.payload
+        }
+    }
     if(action.type === "CLEAR"){
         return null
     }

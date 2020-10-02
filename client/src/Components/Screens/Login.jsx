@@ -85,6 +85,7 @@ function Login(){
         })
     }
     return(
+        <div>
         <Card className="login-card">
         <CardContent >
             <Container>
@@ -108,6 +109,7 @@ function Login(){
             </Container>
         </CardContent>
         </Card>
+        </div>
     )
 }
 

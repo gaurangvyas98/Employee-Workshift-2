@@ -9,7 +9,7 @@ import { yellow } from '@material-ui/core/colors';
 
 const useStyles = makeStyles({
     root: {
-      maxWidth: 500,
+      maxWidth: 400,
       width: 800,
       margin: '8% auto',
       textAlign: 'center',
@@ -82,7 +82,7 @@ function CreateTask(){
 
     //ASSIGN TASK POST REQUEST
     const onAssignTask=()=>{
-        console.log(value, )
+        // console.log(value, )
         fetch("/Create-Task", {
             method: "POST",
             headers: {

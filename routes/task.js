@@ -65,11 +65,38 @@ router.get("/getAllTask", requireLogin, (req,res)=>{
     })
 })
 
-
 //GET ALL USERS 
 router.get("/getAllUsers", requireLogin, (req,res)=>{
     User.find().then(foundUser => {
         return res.json({ allUsersData: foundUser})
     })
+})
+
+//POST TO EDIT PROFILE
+router.post('/edit-profile', requireLogin, (req,res)=>{
+    const {changedName, UserEmail} = req.body;
+
+    User.findOneAndUpdate({email: UserEmail}, {$set:{name: changedName}}, {new: true}, (err, foundUser) => {
+        if (err) {
+            console.log("Something wrong when updating data!");
+        }
+        const {_id, name, email, role, pic} = foundUser;
+        res.json({user: {_id, name, email, role, pic}});
+       
+    });
+})
+
+
+//updating profile pic, we are getting pic from the front-end
+router.put("/updatepic", requireLogin, (req,res)=>{
+    const {pic, UserEmail} = req.body;
+
+    User.findOneAndUpdate({email: UserEmail}, {$set: {pic: pic}}, {new: true}, 
+        (err, result)=>{
+            if(err){
+                return res.status(422).json({error: "Pic cannot be posted"})
+            } 
+            res.json(result)  
+        })
 })
 module.exports = router;

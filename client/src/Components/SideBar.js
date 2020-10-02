@@ -68,7 +68,7 @@ const useStyles = makeStyles((theme) => ({
   },
   content: {
     flexGrow: 1,
-    padding: theme.spacing(3),
+    // padding: theme.spacing(3),
     backgroundColor: '#fff',
     backgroundSize: 'cover !important',
     // height: '100vh',
@@ -86,6 +86,7 @@ const useStyles = makeStyles((theme) => ({
     height: '50%',
     textAlign: 'center',
     margin: '15% auto 2% auto',
+    border: '2px solid #fad208',
   },
   dividerLine:{
     backgroundColor: '#fff',
@@ -160,7 +161,7 @@ function SideBar(props) {
   const drawer = (
     <div>
       <div className={classes.UserPicNameDetails}>
-          <Avatar alt="Remy Sharp" src=""  className={classes.avatar} />
+          <Avatar alt="Remy Sharp" src={state.pic}  className={classes.avatar} />
           <h3>{state.name}</h3>
           {/* <h4>{state.role}</h4> */}
           <h5>{state.email}</h5>
