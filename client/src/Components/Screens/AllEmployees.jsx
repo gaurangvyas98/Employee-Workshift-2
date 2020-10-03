@@ -1,31 +1,60 @@
 import React, { useEffect, useState } from 'react';
-import { Button, Card, CardContent, Container, makeStyles, TextField, Typography } from '@material-ui/core';
+import { Avatar, Button, Card, CardContent, Container, makeStyles, TextField, Typography } from '@material-ui/core';
 import SearchIcon from '@material-ui/icons/Search';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
 
 const useStyles = makeStyles({
-    root: {
-      minWidth: 275,
+    cardContainer: {
+      display: 'flex',
+    /* background-color: blue; */
+      maxWidth: '900px',
+      /* align-items: center; */
+      /* margin: 0 auto; */
+      position: 'relative',
+      flexWrap: 'wrap',
+      justifyContent: 'space-around',
+      margin: '40px auto',
+      padding: '0 !important',
     },
-    bullet: {
-      display: 'inline-block',
-      margin: '0 2px',
-      transform: 'scale(0.8)',
+    card: {
+      minWidth: 330,
+      padding: '0 !important',
+      backgroundColor: '#fad208',
+      textAlign: 'center',
+      margin: '10px auto',
+      display: 'flex',
+      borderRadius: '10px',
+    },
+    avatar: {
+      color: '#fafafa',
+      backgroundColor: '#bdbdbd',
+      width: '50px',
+      height: '50px',
+      margin: '10px 20px',
+    },
+    cardTitleEmail:{
+      margin: '10px auto',
+      display: 'flex',
+      flexDirection: 'column'
     },
     title: {
-      fontSize: 14,
+      fontSize: 18,
+    fontWeight: 600,
     },
-    pos: {
-      marginBottom: 12,
-    },
+    // pos: {
+    //   marginBottom: 12,
+    // },
     searchEmployeeArea:{
         display: 'flex',
         flexDirection: 'row',
         textAlign: 'center',
-        margin: '0 auto',
+        margin: '30px auto',
         alignItems: 'center',
-        justifyContent: 'space-evenly',
+        justifyContent: 'center',
+    },
+    email: {
+      fontSize: '10px'
     }
   });
 
@@ -34,7 +63,9 @@ function AllEmployees(){
     const classes = useStyles();
     const [allUsers, setAllUsers] = useState([])
     const [searchValue, setSearchValue] = useState()
+    const [searchClicked, setSearchClicked] = useState(false)
     
+    //GET ALL THE USERS
     useEffect(() => {
         const fetchAllUsers = async () => {
           try {
@@ -60,26 +91,26 @@ function AllEmployees(){
     // console.log(searchValue);
     const searchEmployee=(e)=>{
         e.preventDefault();
+        setSearchClicked(true)
         allUsers.map(foundUser => {
             if(foundUser.email === searchValue){
                 return (
-                    usercard(foundUser.name, foundUser.email )
+                    usercard(foundUser.name, foundUser.email, foundUser.pic )
                 )
             }
         })
     }
 
     const usercard=(name,email,avatar)=>{
-            // setSearchValue('')      
-            return(
-                <Card className={classes.root}>
-                    <CardContent>
-                        <Typography className={classes.title} color="textSecondary" gutterBottom>{name}</Typography>
-                        <Typography className={classes.pos} color="textSecondary">{email}</Typography>
-                    </CardContent>
-                </Card>
-            )
-       
+      return(
+        <div className={classes.card}>
+            <Avatar alt={name} src={avatar}  className={classes.avatar} />
+            <div className={classes.cardTitleEmail}>
+              <Typography className={classes.title} gutterBottom>{name}</Typography>
+              <Typography className={classes.email} color="textSecondary">{email}</Typography>
+            </div>
+        </div>
+      )
     }
 
 
@@ -99,13 +130,13 @@ function AllEmployees(){
                         
                         id="controllable-states-demo"
                         options={allUsers.map(user => user.email )}
-                        style={{ width: 330 }}
-                        renderInput={(params) => <TextField {...params} label="Search Employee" variant="standard" />}
+                        style={{ width: 220, marginRight: '5%' }}
+                        renderInput={(params) => <TextField {...params} label="Search Employee" variant="standard" style={{color: "white"}}/>}
                         />
-                        <Button startIcon={<SearchIcon />} variant="contained" color="primary" onClick={searchEmployee}> Search </Button>
+                        <Button startIcon={<SearchIcon />} variant="contained" onClick={searchEmployee}> Search </Button>
 
                     </div>
-                   
+                    <div className={classes.cardContainer}>
                     {
                         allUsers.map(foundUser => {
                             return(
@@ -113,6 +144,7 @@ function AllEmployees(){
                             )
                         })
                     }
+                    </div>
                 </Container>
             }
             
@@ -121,3 +153,14 @@ function AllEmployees(){
 }
 
 export default AllEmployees;
+
+
+
+
+                // <Card className={classes.card}>
+                //     <CardContent>
+                //         <Avatar alt={name} src={avatar}  className={classes.avatar} />
+                //         <Typography className={classes.title} color="textSecondary" gutterBottom>{name}</Typography>
+                //         <Typography className={classes.pos} color="textSecondary">{email}</Typography>
+                //     </CardContent>
+                // </Card>

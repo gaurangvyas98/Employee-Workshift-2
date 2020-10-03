@@ -23,6 +23,10 @@ const taskSchema = new mongoose.Schema({
         // ref: "User",
         type: String,
         require: true
+    },
+    status:{
+        type: String,
+        default: "incomplete",
     }
 },{timestamps:true})
 

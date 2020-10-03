@@ -51,7 +51,6 @@ const useStyles = makeStyles((theme) => ({
       width: `calc(100% - ${drawerWidth}px)`,
       marginLeft: drawerWidth,
       backgroundColor: '#fff',
-
     },
   },
   menuButton: {
@@ -65,10 +64,11 @@ const useStyles = makeStyles((theme) => ({
   drawerPaper: {
     width: drawerWidth,
     backgroundColor: '#2e2e2e !important',
+    borderRight: '5px solid #fff',
   },
   content: {
     flexGrow: 1,
-    // padding: theme.spacing(3),
+    padding: 0,
     backgroundColor: '#fff',
     backgroundSize: 'cover !important',
     // height: '100vh',
@@ -82,8 +82,8 @@ const useStyles = makeStyles((theme) => ({
     color: '#fff',
   },
   avatar:{
-    width: '50%',
-    height: '50%',
+    width: '110px',
+    height: '110px',
     textAlign: 'center',
     margin: '15% auto 2% auto',
     border: '2px solid #fad208',
@@ -200,7 +200,7 @@ function SideBar(props) {
     <div className={classes.root}>
       <CssBaseline />
       <AppBar position="fixed" className={classes.appBar}>
-        <Toolbar>
+        <Toolbar className=".MuiToolbar-regular">
           <IconButton color="inherit" aria-label="open drawer"  onClick={handleDrawerToggle} className={classes.menuButton}>
             <MenuIcon />
           </IconButton>

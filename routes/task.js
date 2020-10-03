@@ -99,4 +99,22 @@ router.put("/updatepic", requireLogin, (req,res)=>{
             res.json(result)  
         })
 })
+
+
+//updating TASK STATUS to complete 
+router.put("/completeTask", requireLogin, (req,res)=>{
+    const {taskId} = req.body;
+    // console.log(req.body)
+
+    Tasks.findOneAndUpdate({_id: taskId}, {$set: {status: "complete"}}, {new: true}, 
+        (err, result)=>{
+            if(err){
+                return res.status(422).json({error: "Pic cannot be posted"})
+            } 
+            res.json(result)  
+        })
+})
+
+
+
 module.exports = router;
