@@ -63,7 +63,7 @@ const useStyles = makeStyles({
 
   },
     card: {
-        minWidth: 330,
+        width: 330,
         backgroundColor: '#fad208',
         textAlign: 'center',
         margin: '10px auto',
@@ -126,6 +126,10 @@ export default function Home() {
   }
   
   const DisplayCard=(props)=>{
+    let desc = props.description;
+    if(desc.length >= 20){
+      desc = desc.substring(0,50) + "........."
+    }
     return(
       <Card className={classes.card}>
         <CardContent>
@@ -136,7 +140,10 @@ export default function Home() {
             Assigned By: {props.assignedBy}
         </Typography>
         <Typography variant="body2" component="p">
-            {props.duration}, Description: {props.description}
+             Description: {desc}
+        </Typography>
+        <Typography variant="body2" component="p">
+            {props.duration}
         </Typography>
         </CardContent>
         <CardActions>

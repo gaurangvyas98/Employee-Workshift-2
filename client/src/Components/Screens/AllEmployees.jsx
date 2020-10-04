@@ -89,17 +89,17 @@ function AllEmployees(){
       }, []);
     
     // console.log(searchValue);
-    const searchEmployee=(e)=>{
-        e.preventDefault();
-        setSearchClicked(true)
-        allUsers.map(foundUser => {
-            if(foundUser.email === searchValue){
-                return (
-                    usercard(foundUser.name, foundUser.email, foundUser.pic )
-                )
-            }
-        })
-    }
+    // const searchEmployee=(e)=>{
+    //     e.preventDefault();
+    //     setSearchClicked(true)
+    //     allUsers.map(foundUser => {
+    //         if(foundUser.email === searchValue){
+    //             return (
+    //                 usercard(foundUser.name, foundUser.email, foundUser.pic )
+    //             )
+    //         }
+    //     })
+    // }
 
     const usercard=(name,email,avatar)=>{
       return(
@@ -133,14 +133,14 @@ function AllEmployees(){
                         style={{ width: 220, marginRight: '5%' }}
                         renderInput={(params) => <TextField {...params} label="Search Employee" variant="standard" style={{color: "white"}}/>}
                         />
-                        <Button startIcon={<SearchIcon />} variant="contained" onClick={searchEmployee}> Search </Button>
+                        <Button startIcon={<SearchIcon />} variant="contained" > Search </Button>
 
                     </div>
                     <div className={classes.cardContainer}>
                     {
                         allUsers.map(foundUser => {
                             return(
-                                usercard(foundUser.name, foundUser.email)
+                                usercard(foundUser.name, foundUser.email, foundUser.pic)
                             )
                         })
                     }
